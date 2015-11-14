@@ -47,6 +47,25 @@
             android:textSize="15sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/textView3"
+            android:text="PO Num:"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/po_num"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/vendor"
+            android:layout_marginLeft="30dp"
+            android:layout_toRightOf="@id/textView2"
+            android:text="po_num"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
     </RelativeLayout>
 
     <LinearLayout
