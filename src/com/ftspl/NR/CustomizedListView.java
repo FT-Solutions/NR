@@ -184,7 +184,7 @@ class getDetails extends AsyncTask<String, Void, String> {
         	String feed = "";
         	pdia.setCancelable(false);
 			try {
-				feed = Constants.connect.callREST_PODetail(Constants.context, poNoStr);
+				feed = Constants.connect.getPODetail(Constants.context, poNoStr);
 				Log.d("detail DATA", feed);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
@@ -251,7 +251,7 @@ class getDetails extends AsyncTask<String, Void, String> {
         	String feed = "";
         	pdia.setCancelable(false);
 			try {
-				feed = Constants.connect.callRESTservice(Constants.context);
+				feed = Constants.connect.getPoList(Constants.context);
 				Log.d("XML DATA", feed);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block

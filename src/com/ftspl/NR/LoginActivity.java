@@ -1,23 +1,36 @@
 package com.ftspl.NR;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.text.Html;
+import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 
 @SuppressLint("NewApi")
 public class LoginActivity extends Activity {
 	
+	public ProgressDialog pdia;
+	public Context context;
 	Button login;
 	EditText username, password, appliServer, userId;
 	
@@ -25,7 +38,7 @@ public class LoginActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        
+        context = this;
         login = (Button) findViewById(R.id.button1);
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
@@ -38,6 +51,7 @@ public class LoginActivity extends Activity {
         
         Constants.usernameStr = Constants.loginDetails.getString("sysem_username", "");
         Constants.passwordStr = Constants.loginDetails.getString("sysem_password", "");
+        Constants.userId = Constants.loginDetails.getString("user_id", "");
 		
         login.setOnClickListener(new OnClickListener() {
 			
@@ -45,7 +59,6 @@ public class LoginActivity extends Activity {
 			public void onClick(View v) {
 				
 				Boolean error = false;
-				Intent intent;
 				
 				if(appliServer.getText().toString().equals("")) {
 					error = true;
@@ -63,22 +76,7 @@ public class LoginActivity extends Activity {
 				}
 					
 				if(!error) {
-					SharedPreferences.Editor ed = Constants.loginDetails.edit();
-					if(Constants.usernameStr.equals("") || Constants.passwordStr.equals("")) {
-						Constants.usernameStr = username.getText().toString();
-						Constants.passwordStr = password.getText().toString();
-						Constants.ApplicationServer = appliServer.getText().toString();
-						Constants.userId = userId.getText().toString();
-			        	ed.putString("sysem_username", Constants.usernameStr);
-			        	ed.putString("sysem_password", Constants.passwordStr);
-			        	ed.putString("application_server", Constants.ApplicationServer);
-			        	ed.putString("user_id", Constants.userId);
-			        	ed.commit();
-					}
-		        	
-					intent = new Intent(Constants.context, QuickViewActivity.class);
-					startActivity(intent);
-					finish();
+					new checkUser().execute("");
 				}
 			}
 		});
@@ -91,5 +89,73 @@ public class LoginActivity extends Activity {
         // Inflate the menu; this adds items to the action bar if it is present.
         //getMenuInflater().inflate(R.menu.main, menu);
         return true;
+    }
+    
+    class checkUser extends AsyncTask<String, Void, String> {
+
+        @Override
+    	protected void onPreExecute(){ 
+    	   super.onPreExecute();
+    	        pdia = new ProgressDialog(context);
+    	        pdia.setMessage("Please wait...");
+    	        pdia.show();
+				
+    	}
+        
+        protected String doInBackground(String... param) {
+        	String feed = "";
+        	Constants.usernameStr = username.getText().toString();
+			Constants.passwordStr = password.getText().toString();
+			Constants.ApplicationServer = appliServer.getText().toString();
+			Constants.userId = userId.getText().toString();
+			
+			try {
+				feed = Constants.connect.checkUser(Constants.context);
+				Log.d("User Check", feed);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return feed;
+        }
+
+        protected void onPostExecute(String feed) {
+        	pdia.dismiss();
+        	
+        	if(feed.equals("Valid User")) { 
+	        	SharedPreferences.Editor ed = Constants.loginDetails.edit();
+				//if(Constants.usernameStr.equals("") || Constants.passwordStr.equals("") || Constants.userId.equals("")) {
+//					Constants.usernameStr = username.getText().toString();
+//					Constants.passwordStr = password.getText().toString();
+//					Constants.ApplicationServer = appliServer.getText().toString();
+//					Constants.userId = userId.getText().toString();
+					
+		        	ed.putString("sysem_username", Constants.usernameStr);
+		        	ed.putString("sysem_password", Constants.passwordStr);
+		        	ed.putString("application_server", Constants.ApplicationServer);
+		        	ed.putString("user_id", Constants.userId);
+		        	ed.commit();
+				//}
+	        	
+				Intent intent = new Intent(Constants.context, QuickViewActivity.class);
+				startActivity(intent);
+				finish();
+        	} else {
+        		AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+				
+				alertDialogBuilder
+				.setMessage(feed)
+				.setCancelable(false)
+				.setPositiveButton("Ok",new DialogInterface.OnClickListener() {
+					public void onClick(DialogInterface dialog,int id) {
+						dialog.dismiss();
+					}
+				  });
+
+				AlertDialog alertDialog = alertDialogBuilder.create();
+				alertDialog.show();
+        	}
+			
+        }
     }
 }

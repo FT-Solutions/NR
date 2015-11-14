@@ -50,7 +50,7 @@ public class QuickViewActivity extends Activity {
 		refresh = (ImageButton) findViewById(R.id.refresh);
 		refresh.setVisibility(View.INVISIBLE);
 		
-		getActionBar().setTitle(Html.fromHtml("<font color='#000000'>Asisindia</font>"));
+		getActionBar().setTitle(Html.fromHtml("<font color='#000000'>NR Agarwal</font>"));
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
         
 		
@@ -69,7 +69,20 @@ public class QuickViewActivity extends Activity {
 	        Constants.ApplicationServer = Constants.loginDetails.getString("application_server", "");
 			
 			if(Constants.connect.isConnectingToInternet(Constants.context)) {
-				new fetchCount().execute("");
+				//new fetchCount().execute("");
+				
+    			poTab.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						// TODO Auto-generated method stub
+						if(Constants.connect.isConnectingToInternet(context)){
+							new RetrievePOApproval().execute("");
+						} else {
+							Toast.makeText(context, Constants.NO_CONNECTION, Toast.LENGTH_LONG).show();
+						}
+					}
+				});
+    			
 			} else {
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				
@@ -244,7 +257,7 @@ public class QuickViewActivity extends Activity {
         protected String doInBackground(String... param) {
         	String feed = "";
 			try {
-				feed = Constants.connect.callRESTservice(Constants.context);
+				feed = Constants.connect.getPoList(Constants.context);
 				Log.d("XML DATA", feed);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block

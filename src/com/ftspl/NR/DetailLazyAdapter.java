@@ -42,7 +42,7 @@ public class DetailLazyAdapter extends BaseAdapter {
         if(convertView==null)
             vi = inflater.inflate(R.layout.po_detail_list_row, null);
  
-        TextView EBELN = (TextView)vi.findViewById(R.id.EBELN);
+        //TextView EBELN = (TextView)vi.findViewById(R.id.EBELN);
         TextView EBELP = (TextView)vi.findViewById(R.id.EBELP);
         TextView TXZ01 = (TextView)vi.findViewById(R.id.TXZ01);
         TextView MATNR = (TextView)vi.findViewById(R.id.MATNR);
@@ -52,12 +52,13 @@ public class DetailLazyAdapter extends BaseAdapter {
         TextView MEINS = (TextView)vi.findViewById(R.id.MEINS);
         TextView NETWR = (TextView)vi.findViewById(R.id.NETWR);
         TextView BRTWR = (TextView)vi.findViewById(R.id.BRTWR);
+        TextView STOCK = (TextView)vi.findViewById(R.id.STOCK);
  
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
  
         // Setting all values in listview
-        EBELN.setText(song.get("EBELN"));
+        //EBELN.setText(song.get("EBELN"));
         EBELP.setText(song.get("EBELP"));
         TXZ01.setText(song.get("TXZ01"));
         MATNR.setText(song.get("MATNR"));
@@ -67,6 +68,7 @@ public class DetailLazyAdapter extends BaseAdapter {
         MEINS.setText(song.get("MEINS"));
         NETWR.setText(song.get("NETWR"));
         BRTWR.setText(song.get("BRTWR"));
+        STOCK.setText(song.get("STOCK"));
         
         return vi;
     }

@@ -35,7 +35,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 	
 	Button accept, reject;
 	Context context;
-	TextView EBELN ,EBELP ,TXZ01 ,MATNR ,WERKS ,MATKL ,MENGE ,MEINS, NETWR, BRTWR, nameView, vendorView;
+	TextView EBELN ,EBELP ,TXZ01 ,MATNR ,WERKS ,MATKL ,MENGE ,MEINS, NETWR, BRTWR, STOCK, nameView, vendorView, poView;
 	 ListView list;
 	String action, codeStr, po_no, name, vendor;
 	ArrayList<HashMap<String, String>> detailList = new ArrayList<HashMap<String, String>>();
@@ -50,7 +50,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         Intent intent = getIntent();
         int index = intent.getIntExtra("jsonIndex", 0);
         
-        EBELN = (TextView) findViewById(R.id.EBELN);
+        //EBELN = (TextView) findViewById(R.id.EBELN);
         EBELP = (TextView) findViewById(R.id.EBELP);
         TXZ01 = (TextView) findViewById(R.id.TXZ01);
         MATNR = (TextView) findViewById(R.id.MATNR);
@@ -60,9 +60,11 @@ public class DetailActivity extends Activity implements OnClickListener {
         MEINS = (TextView) findViewById(R.id.MEINS);
         NETWR = (TextView) findViewById(R.id.NETWR);
         BRTWR = (TextView) findViewById(R.id.BRTWR);
+        STOCK = (TextView) findViewById(R.id.STOCK);
         
         nameView = (TextView) findViewById(R.id.name);
         vendorView = (TextView) findViewById(R.id.vendor);
+        poView = (TextView) findViewById(R.id.po_num);
         
         accept = (Button) findViewById(R.id.accept);
         reject = (Button) findViewById(R.id.reject);
@@ -88,6 +90,7 @@ public class DetailActivity extends Activity implements OnClickListener {
     	
     	nameView.setText(name);
     	vendorView.setText(vendor);
+    	poView.setText(po_no);
     	
 		
 		for (int i = 0; i < Constants.releaseDetail.length(); i++) {
@@ -106,6 +109,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 			map.put("MEINS",record.getString("MEINS"));
 			map.put("NETWR",record.getString("NETWR"));
 			map.put("BRTWR",record.getString("BRTWR"));
+			map.put("STOCK",record.getString("STOCK"));
 			
 			detailList.add(map);
 		}
@@ -168,7 +172,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         	String feed = "";
         	pdia.setCancelable(false);
 			try {
-				feed = Constants.connect.callRESTserviceRejAp(Constants.context, po_no, codeStr, action);
+				feed = Constants.connect.poAcceptReject(Constants.context, po_no, codeStr, action);
 				Log.d("XML DATA", feed);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
@@ -199,7 +203,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         protected String doInBackground(String... param) {
         	String feed = "";
 			try {
-				feed = Constants.connect.callRESTservice(Constants.context);
+				feed = Constants.connect.getPoList(Constants.context);
 				Log.d("XML DATA", feed);
 				Constants.responseData = feed;
 				Log.d("RESPONSE", Constants.responseData);
@@ -225,7 +229,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 		SharedPreferences.Editor ed = Constants.loginDetails.edit();
 		ed.remove("system_username");
 		ed.remove("system_password");
-		
+	
 		ed.clear();
 		ed.commit();
 		

@@ -23,7 +23,7 @@ import android.util.Log;
 
 public class Connect {
 
-	public String callRESTservice(Context context) {  
+	public String checkUser(Context context) {  
 	    String result = "";  
 	    HttpHost targetHost = new HttpHost(Constants.ApplicationServer, Constants.PORT, "http");  
 	    DefaultHttpClient httpclient = new DefaultHttpClient();  
@@ -37,7 +37,38 @@ public class Connect {
 	    BasicHttpContext localcontext = new BasicHttpContext();  
 	    localcontext.setAttribute(ClientContext.AUTH_SCHEME_PREF, authCache);  
 	    
-	    HttpGet request = new HttpGet("/sap/zget_po/?sap-client="+Constants.SAP_CLIENT);
+	    HttpGet request = new HttpGet("/sap/ft_mobi/ft_chk_usr/"+Constants.userId+"?sap-client="+Constants.SAP_CLIENT);
+	    ResponseHandler<String> handler = new BasicResponseHandler();
+	    
+	    try {
+	    	result = httpclient.execute(targetHost, request, handler);
+	    } catch (ClientProtocolException e) {
+	    	e.printStackTrace();
+	    	result = "0";  
+	    } catch (IOException e) {
+	    	e.printStackTrace();
+	    	result = "99";  
+	    }  
+	    
+	    httpclient.getConnectionManager().shutdown();  
+	    return result;
+	} 
+	
+	public String getPoList(Context context) {  
+	    String result = "";  
+	    HttpHost targetHost = new HttpHost(Constants.ApplicationServer, Constants.PORT, "http");  
+	    DefaultHttpClient httpclient = new DefaultHttpClient();  
+	    httpclient.getCredentialsProvider().setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()), new UsernamePasswordCredentials(Constants.usernameStr, Constants.passwordStr));  
+	    // Create AuthCache instance  
+	    AuthCache authCache = new BasicAuthCache();  
+	    // Generate BASIC scheme object and add it to the local auth cache  
+	    BasicScheme basicAuth = new BasicScheme();  
+	    authCache.put(targetHost, basicAuth);  
+	    // Add AuthCache to the execution context  
+	    BasicHttpContext localcontext = new BasicHttpContext();  
+	    localcontext.setAttribute(ClientContext.AUTH_SCHEME_PREF, authCache);  
+	    
+	    HttpGet request = new HttpGet("/sap/ft_mobi/FT_PO_LIST/"+Constants.userId+"?sap-client="+Constants.SAP_CLIENT);
 	    ResponseHandler<String> handler = new BasicResponseHandler();
 	    
 	    try {
@@ -54,7 +85,7 @@ public class Connect {
 	    return result;
 	}  
 	
-	public String callRESTserviceRejAp(Context context,  String po_no, String code, String action) {  
+	public String poAcceptReject(Context context,  String po_no, String code, String action) {  
 	    String result = "";  
 
 	    HttpHost targetHost = new HttpHost(Constants.ApplicationServer, Constants.PORT, "http");  
@@ -68,7 +99,7 @@ public class Connect {
 	    // Add AuthCache to the execution context  
 	    BasicHttpContext localcontext = new BasicHttpContext();  
 	    localcontext.setAttribute(ClientContext.AUTH_SCHEME_PREF, authCache); 
-	    HttpGet request = new HttpGet("/sap/zget_po_app/"+po_no+"/"+code+"/"+action+"?sap-client="+Constants.SAP_CLIENT);  
+	    HttpGet request = new HttpGet("/sap/ft_mobi/FT_PO_APP/"+Constants.userId+"/"+po_no+"/"+code+"/"+action+"?sap-client="+Constants.SAP_CLIENT);  
 	    ResponseHandler<String> handler = new BasicResponseHandler();
 	    
 	    try {
@@ -85,7 +116,7 @@ public class Connect {
 	    return result;
 	}  
 	
-	public String callREST_PODetail(Context context, String po_no) {  
+	public String getPODetail(Context context, String po_no) {  
 	    String result = "";  
 
 	    HttpHost targetHost = new HttpHost(Constants.ApplicationServer, Constants.PORT, "http");  
@@ -100,7 +131,7 @@ public class Connect {
 	    BasicHttpContext localcontext = new BasicHttpContext();  
 	    localcontext.setAttribute(ClientContext.AUTH_SCHEME_PREF, authCache);  
 	    
-	    HttpGet request = new HttpGet("/sap/zget_po_det/"+po_no+"?sap-client="+Constants.SAP_CLIENT);
+	    HttpGet request = new HttpGet("/sap/ft_mobi/FT_PO_detail/"+Constants.userId+"/"+po_no+"?sap-client="+Constants.SAP_CLIENT);
 	    ResponseHandler<String> handler = new BasicResponseHandler();
 	    
 	    try {

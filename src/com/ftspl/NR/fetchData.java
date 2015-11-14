@@ -29,7 +29,7 @@ public class fetchData {
         	String data = "";
         	pdia.setCancelable(false);
 			try {
-				data = Constants.connect.callRESTservice(Constants.context);
+				data = Constants.connect.getPoList(Constants.context);
 				Log.d("PO List", data);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
