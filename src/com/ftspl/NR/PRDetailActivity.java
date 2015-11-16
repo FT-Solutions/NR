@@ -1,12 +1,7 @@
 package com.ftspl.NR;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import com.ftspl.NR.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
@@ -31,40 +26,44 @@ import android.widget.Toast;
 
 
 @SuppressLint("NewApi")
-public class DetailActivity extends Activity implements OnClickListener {
+public class PRDetailActivity extends Activity implements OnClickListener {
 	
 	Button accept, reject;
 	Context context;
-	TextView EBELN ,EBELP ,TXZ01 ,MATNR ,WERKS ,MATKL ,MENGE ,MEINS, NETWR, BRTWR, STOCK, nameView, vendorView, poView;
+	TextView BANFN,BNFPO,MATNR,MAKTX,MENGE,MEINS,AFNAM ,WERKS,BRTWR, STOCK, C0_STOCK;
 	 ListView list;
-	String action, codeStr, po_no, name, vendor;
-	ArrayList<HashMap<String, String>> detailList = new ArrayList<HashMap<String, String>>();
+	String action, codeStr, pr_no, item_no;
 	private ProgressDialog pdia;
 	DetailLazyAdapter adapter;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detail);
+        setContentView(R.layout.activity_pr_detail);
         context = this;
         Intent intent = getIntent();
         int index = intent.getIntExtra("jsonIndex", 0);
+        try {
+        	JSONObject list = Constants.prListData.getJSONObject(index);
+        	codeStr = list.getString("FRGC");
+        	pr_no = list.getString("BANFN");
+        	item_no = list.getString("BNFPO");
+        	
+        } catch (JSONException e) {
+    		// TODO Auto-generated catch block
+    		e.printStackTrace();
+    	}
         
-        //EBELN = (TextView) findViewById(R.id.EBELN);
-        EBELP = (TextView) findViewById(R.id.EBELP);
-        TXZ01 = (TextView) findViewById(R.id.TXZ01);
+        BANFN = (TextView) findViewById(R.id.BANFN);
+        BNFPO = (TextView) findViewById(R.id.BNFPO);
         MATNR = (TextView) findViewById(R.id.MATNR);
-        WERKS = (TextView) findViewById(R.id.WERKS);
-        MATKL = (TextView) findViewById(R.id.MATKL);
+        MAKTX = (TextView) findViewById(R.id.MAKTX);
         MENGE = (TextView) findViewById(R.id.MENGE);
         MEINS = (TextView) findViewById(R.id.MEINS);
-        NETWR = (TextView) findViewById(R.id.NETWR);
-        BRTWR = (TextView) findViewById(R.id.BRTWR);
+        AFNAM = (TextView) findViewById(R.id.AFNAM);
+        WERKS = (TextView) findViewById(R.id.WERKS);
         STOCK = (TextView) findViewById(R.id.STOCK);
-        
-        nameView = (TextView) findViewById(R.id.name);
-        vendorView = (TextView) findViewById(R.id.vendor);
-        poView = (TextView) findViewById(R.id.po_num);
+        C0_STOCK = (TextView) findViewById(R.id.CO_STOCK);
         
         accept = (Button) findViewById(R.id.accept);
         reject = (Button) findViewById(R.id.reject);
@@ -75,49 +74,26 @@ public class DetailActivity extends Activity implements OnClickListener {
         getActionBar().setTitle(Html.fromHtml("<font color='#000000'>Detail View</font>"));
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
         
-        list=(ListView)findViewById(R.id.listView1);
-        
-        // Getting adapter by passing xml data ArrayList
-        adapter=new DetailLazyAdapter(this, detailList);
-        list.setAdapter(adapter);
         
        try {
-    	JSONObject list = Constants.poListData.getJSONObject(index);
-    	codeStr = list.getString("FRGC");
-    	name = list.getString("NAME1");
-    	vendor = list.getString("LIFNR");
-    	po_no = list.getString("EBELN");
+    	JSONObject list = Constants.releaseDetail.getJSONObject(0);
     	
-    	nameView.setText(name);
-    	vendorView.setText(vendor);
-    	poView.setText(po_no);
+    	BANFN.setText(list.getString("BANFN"));
+        BNFPO.setText(list.getString("BNFPO"));
+        MATNR.setText(list.getString("MATNR"));
+        MAKTX.setText(list.getString("MAKTX"));
+        MENGE.setText(list.getString("MENGE"));
+        MEINS.setText(list.getString("MEINS"));
+        AFNAM.setText(list.getString("AFNAM"));
+        WERKS.setText(list.getString("WERKS"));
+        STOCK.setText(list.getString("STOCK"));
+        C0_STOCK.setText(list.getString("C0_STOCK"));
+        
     	
-		
-		for (int i = 0; i < Constants.releaseDetail.length(); i++) {
-			JSONObject record = Constants.releaseDetail.getJSONObject(i);
-			
-			HashMap<String, String> map = new HashMap<String, String>();
-
-            // adding each child node to HashMap key => value
-            map.put("EBELN", record.getString("EBELN"));
-            map.put("EBELP", record.getString("EBELP"));
-			map.put("TXZ01",record.getString("TXZ01"));
-			map.put("MATNR",record.getString("MATNR"));
-			map.put("WERKS",record.getString("WERKS"));
-			map.put("MATKL",record.getString("MATKL"));
-			map.put("MENGE",record.getString("MENGE"));
-			map.put("MEINS",record.getString("MEINS"));
-			map.put("NETWR",record.getString("NETWR"));
-			map.put("BRTWR",record.getString("BRTWR"));
-			map.put("STOCK",record.getString("STOCK"));
-			
-			detailList.add(map);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
-		
-	} catch (JSONException e) {
-		// TODO Auto-generated catch block
-		e.printStackTrace();
-	}
         
     }
 
@@ -172,7 +148,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         	String feed = "";
         	pdia.setCancelable(false);
 			try {
-				feed = Constants.connect.poAcceptReject(Constants.context, po_no, codeStr, action);
+				feed = Constants.connect.prAcceptReject(Constants.context, pr_no, item_no ,codeStr, action);
 				Log.d("XML DATA", feed);
 			} catch (Throwable e) {
 				// TODO Auto-generated catch block
@@ -183,12 +159,12 @@ public class DetailActivity extends Activity implements OnClickListener {
 
         protected void onPostExecute(String feed) {
         	pdia.dismiss();
-        	new RetrievePOApproval().execute("");
+        	new RetrievePRList().execute("");
         	Toast.makeText(getApplicationContext(), feed, Toast.LENGTH_LONG).show();
         }
     }
     
-	class RetrievePOApproval extends AsyncTask<String, Void, String> {
+	class RetrievePRList extends AsyncTask<String, Void, String> {
 
         private Exception exception;
         
@@ -203,7 +179,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         protected String doInBackground(String... param) {
         	String feed = "";
 			try {
-				feed = Constants.connect.getPoList(Constants.context);
+				feed = Constants.connect.getPRList(Constants.context);
 				Log.d("XML DATA", feed);
 				Constants.responseData = feed;
 				Log.d("RESPONSE", Constants.responseData);
@@ -216,7 +192,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 
         protected void onPostExecute(String feed) {
         	pdia.dismiss();
-        	Intent intent = new Intent(Constants.context, POListView.class);
+        	Intent intent = new Intent(Constants.context, PRListView.class);
         	intent.putExtra("prdata", Constants.responseData);
        	 	intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_NEW_TASK);
        	 	intent.addFlags(Intent.FLAG_ACTIVITY_NO_HISTORY);

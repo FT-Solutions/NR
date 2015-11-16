@@ -15,6 +15,7 @@ public class Constants {
 	public static String NO_DATA = "No data";
 	
 	public static JSONArray poListData = null;
+	public static JSONArray prListData = null;
 	public static String responseData = "";
 	public static JSONArray releaseDetail = null;
 	

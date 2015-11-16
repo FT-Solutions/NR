@@ -69,20 +69,7 @@ public class QuickViewActivity extends Activity {
 	        Constants.ApplicationServer = Constants.loginDetails.getString("application_server", "");
 			
 			if(Constants.connect.isConnectingToInternet(Constants.context)) {
-				//new fetchCount().execute("");
-				
-    			poTab.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						// TODO Auto-generated method stub
-						if(Constants.connect.isConnectingToInternet(context)){
-							new RetrievePOApproval().execute("");
-						} else {
-							Toast.makeText(context, Constants.NO_CONNECTION, Toast.LENGTH_LONG).show();
-						}
-					}
-				});
-    			
+				new fetchCount().execute("");
 			} else {
 				AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
 				
@@ -176,35 +163,50 @@ public class QuickViewActivity extends Activity {
         	String temData = data;
         	JSONObject jsonObj;
         	JSONArray prArray = null;
-
+        	
+        	prTab.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.grid_bg));
     		poTab.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.grid_bg));
 			try {
 				jsonObj = new JSONObject(data);
-				prArray = jsonObj.getJSONArray("MOBI");
+				prArray = jsonObj.getJSONArray("ITAB");
 				
 				if(prArray instanceof JSONArray) {
 	        		String prCount = "";
 	        		String poCount = "";
 	        		
-	        		prCount = prArray.getJSONObject(0).getString("PR");
-	        		poCount = prArray.getJSONObject(0).getString("PO");
+	        		prCount = prArray.getJSONObject(0).getString("PR_COUNT");
+	        		poCount = prArray.getJSONObject(0).getString("PO_COUNT");
+	        		ImageView poImage = (ImageView) poTab.findViewById(R.id.imageView1);
+	        		ImageView prImage = (ImageView) prTab.findViewById(R.id.imageView1);
 	        		
 	        		if(prCount.equals("")) {
 	        			prTab.setBackgroundDrawable(getResources().getDrawable(R.drawable.grid_disable_bg));
-	        			ImageView prImage = (ImageView) prTab.findViewById(R.id.imageView1);
 	        			prImage.setImageDrawable(getResources().getDrawable(R.drawable.po_grey));
 	        			prCount = "0";
+	        		} else {
+	        			prImage.setImageDrawable(getResources().getDrawable(R.drawable.po_blue));
+	        			prTab.setOnClickListener(new OnClickListener() {
+							
+							@Override
+							public void onClick(View arg0) {
+								// TODO Auto-generated method stub
+								prTab.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.grid_selected_bg));
+								if(Constants.connect.isConnectingToInternet(context)){
+									new RetrievePRList().execute("");
+								} else {
+									Toast.makeText(context, Constants.NO_CONNECTION, Toast.LENGTH_LONG).show();
+									prTab.setBackgroundDrawable(context.getResources().getDrawable(R.drawable.grid_bg));
+								}
+							}
+						});
 	        		}
-	        		
-	        		ImageView prImage = (ImageView) poTab.findViewById(R.id.imageView1);
 	        		
 	        		if(poCount.equals("")) {
 	        			poTab.setBackgroundDrawable(getResources().getDrawable(R.drawable.grid_disable_bg));
-	        			prImage = (ImageView) poTab.findViewById(R.id.imageView1);
-	        			prImage.setImageDrawable(getResources().getDrawable(R.drawable.po_grey));
+	        			poImage.setImageDrawable(getResources().getDrawable(R.drawable.po_grey));
 	        			poCount = "0";
 	        		} else {
-	        			prImage.setImageDrawable(getResources().getDrawable(R.drawable.po_blue));
+	        			poImage.setImageDrawable(getResources().getDrawable(R.drawable.po_blue));
 	        			poTab.setOnClickListener(new OnClickListener() {
 							
 							@Override
@@ -281,7 +283,7 @@ public class QuickViewActivity extends Activity {
 			}
             
         	if(prArray instanceof JSONArray) {
-	        	Intent intent = new Intent(context, CustomizedListView.class);
+	        	Intent intent = new Intent(context, POListView.class);
 	        	intent.putExtra("prdata", temData);
 	        	startActivity(intent);
 	        			
@@ -291,6 +293,55 @@ public class QuickViewActivity extends Activity {
         }
     }
 
+	class RetrievePRList extends AsyncTask<String, Void, String> {
+
+        private Exception exception;
+        
+        @Override
+    	protected void onPreExecute(){ 
+    	   super.onPreExecute();
+    	        pdia = new ProgressDialog(context);
+    	        pdia.setMessage("Please wait...");
+    	        pdia.show();    
+    	}
+        
+        protected String doInBackground(String... param) {
+        	String feed = "";
+			try {
+				feed = Constants.connect.getPRList(Constants.context);
+				Log.d("XML DATA", feed);
+			} catch (Throwable e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			return feed;
+        }
+
+        protected void onPostExecute(String feed) {
+          
+        	pdia.dismiss();
+        	String temData = feed;
+        	JSONObject jsonObj;
+        	JSONArray prArray = null;
+			try {
+				jsonObj = new JSONObject(feed);
+				prArray = jsonObj.getJSONArray("ITAB_PR");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+            
+        	if(prArray instanceof JSONArray) {
+	        	Intent intent = new Intent(context, PRListView.class);
+	        	intent.putExtra("prdata", temData);
+	        	startActivity(intent);
+	        			
+        	} else {
+        		Toast.makeText(getApplicationContext(), "Something Wrong", Toast.LENGTH_LONG).show();
+        	}
+        }
+    }
+	
 	public void logout(View v) {
 		SharedPreferences.Editor ed = Constants.loginDetails.edit();
 		ed.remove("system_username");

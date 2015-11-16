@@ -240,7 +240,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_centerVertical="true"
-                android:text="Current Stock:"
+                android:text="Plant Stk:"
                 android:textColor="@color/blue"
                 android:textSize="15sp"
                 android:textStyle="bold" />
@@ -250,6 +250,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
                 android:layout_centerHorizontal="true"
+                android:layout_marginLeft="5dp"
                 android:layout_toRightOf="@id/TextView16"
                 android:textColor="@color/blue"
                 android:textSize="15sp"

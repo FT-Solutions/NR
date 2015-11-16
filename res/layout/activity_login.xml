@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Application Server:" />
+                android:text="Server IP:" />
 
             <EditText
                 android:id="@+id/application_server"
@@ -36,6 +36,31 @@
                 android:layout_toRightOf="@id/pr_count"
                 android:inputType="text" />
 
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/appl_server" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="SAP Client:" />
+
+            <EditText
+                android:id="@+id/sap_client"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_toRightOf="@+id/TextView01"
+                android:inputType="text" >
+
+                <requestFocus />
+            </EditText>
         </RelativeLayout>
 
     </RelativeLayout>
@@ -56,7 +81,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Username:" />
+                android:text="SAP User:" />
 
             <EditText
                 android:id="@+id/username"
@@ -78,7 +103,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerVertical="true"
-                android:text="Password:" />
+                android:text="SAP Password:" />
 
             <EditText
                 android:id="@+id/password"

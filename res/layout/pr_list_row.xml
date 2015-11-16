@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="10dip" >
+
+    <!-- Title Of Song -->
+
+    <TextView
+        android:id="@+id/pr_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_toRightOf="@+id/thumbnail"
+        android:text="Material"
+        android:textSize="12sp"
+        android:textStyle="bold" />
+
+    <!-- Artist Name -->
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/pr_text" >
+
+        <TextView
+            android:id="@+id/pr_no"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left|center"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1"
+            android:text="pr num"
+            android:textSize="15sp" />
+
+    </LinearLayout>
+
+    <!-- Rightend Duration -->
+
+
+    <!-- Rightend Arrow -->
+
+</RelativeLayout>

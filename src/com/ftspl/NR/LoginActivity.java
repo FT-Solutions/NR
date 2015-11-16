@@ -32,7 +32,7 @@ public class LoginActivity extends Activity {
 	public ProgressDialog pdia;
 	public Context context;
 	Button login;
-	EditText username, password, appliServer, userId;
+	EditText username, password, appliServer, userId, sapClient;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +44,7 @@ public class LoginActivity extends Activity {
         password = (EditText) findViewById(R.id.password);
         appliServer = (EditText) findViewById(R.id.application_server);
         userId = (EditText) findViewById(R.id.userId);
+        sapClient = (EditText) findViewById(R.id.sap_client);
         
         getActionBar().setTitle(Html.fromHtml("<font color='#000000'>NR Agrawal</font>"));
         getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
@@ -52,6 +53,7 @@ public class LoginActivity extends Activity {
         Constants.usernameStr = Constants.loginDetails.getString("sysem_username", "");
         Constants.passwordStr = Constants.loginDetails.getString("sysem_password", "");
         Constants.userId = Constants.loginDetails.getString("user_id", "");
+        Constants.SAP_CLIENT = Constants.loginDetails.getString("sap_client", "");
 		
         login.setOnClickListener(new OnClickListener() {
 			
@@ -63,6 +65,9 @@ public class LoginActivity extends Activity {
 				if(appliServer.getText().toString().equals("")) {
 					error = true;
 					appliServer.setError("Provide Server IP");
+				} else if(sapClient.getText().toString().equals("")) {
+					error = true;
+					sapClient.setError("Provide SAP Client");
 				} else if(username.getText().toString().equals("")) {
 					error = true;
 					username.setError("Provide username");
@@ -105,6 +110,7 @@ public class LoginActivity extends Activity {
         protected String doInBackground(String... param) {
         	String feed = "";
         	Constants.usernameStr = username.getText().toString();
+        	Constants.SAP_CLIENT = sapClient.getText().toString();
 			Constants.passwordStr = password.getText().toString();
 			Constants.ApplicationServer = appliServer.getText().toString();
 			Constants.userId = userId.getText().toString();
@@ -134,6 +140,7 @@ public class LoginActivity extends Activity {
 		        	ed.putString("sysem_password", Constants.passwordStr);
 		        	ed.putString("application_server", Constants.ApplicationServer);
 		        	ed.putString("user_id", Constants.userId);
+		        	ed.putString("sap_client", Constants.SAP_CLIENT);
 		        	ed.commit();
 				//}
 	        	

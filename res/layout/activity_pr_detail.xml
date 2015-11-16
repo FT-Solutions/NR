@@ -1,0 +1,261 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@drawable/app_bg" >
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp" >
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout1"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp" >
+
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="PR Num:" />
+
+            <TextView
+                android:id="@+id/BANFN"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp"
+                android:text="TextView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout2"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/relativeLayout1" >
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Item:" />
+
+            <TextView
+                android:id="@+id/BNFPO"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp"
+                android:text="TextView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout3"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/relativeLayout2" >
+
+            <TextView
+                android:id="@+id/TextView01"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Text:" />
+
+            <TextView
+                android:id="@+id/MAKTX"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp"
+                android:text="TextView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout4"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout3" >
+
+            <TextView
+                android:id="@+id/TextView03"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Material:" />
+
+            <TextView
+                android:id="@+id/MATNR"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout5"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout4" >
+
+            <TextView
+                android:id="@+id/TextView05"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Plant:" />
+
+            <TextView
+                android:id="@+id/WERKS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout6"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout5" >
+
+            <TextView
+                android:id="@+id/TextView07"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Qty:" />
+
+            <TextView
+                android:id="@+id/MENGE"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout8"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout6" >
+
+            <TextView
+                android:id="@+id/TextView11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="UOM:" />
+
+            <TextView
+                android:id="@+id/MEINS"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="60dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout9"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout8" >
+
+            <TextView
+                android:id="@+id/TextView13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Requester:" />
+
+            <TextView
+                android:id="@+id/AFNAM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp"
+                android:text="textView" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout10"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout9" >
+
+            <TextView
+                android:id="@+id/TextView15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Plant Stock:" />
+
+            <TextView
+                android:id="@+id/STOCK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="80dp" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/RelativeLayout01"
+            android:layout_width="fill_parent"
+            android:layout_height="25dp"
+            android:layout_below="@id/RelativeLayout10" >
+
+            <TextView
+                android:id="@+id/TextView02"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:text="Company Stock:" />
+
+            <TextView
+                android:id="@+id/CO_STOCK"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="120dp" />
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/blue" >
+
+        <Button
+            android:id="@+id/reject"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginTop="5dp"
+            android:layout_toLeftOf="@+id/accept"
+            android:background="@color/red"
+            android:drawableLeft="@drawable/icon_delete"
+            android:text="Reject" />
+
+        <Button
+            android:id="@+id/accept"
+            android:layout_width="100dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/green"
+            android:drawableLeft="@drawable/tick"
+            android:text="Accept" />
+    </RelativeLayout>
+
+</RelativeLayout>
