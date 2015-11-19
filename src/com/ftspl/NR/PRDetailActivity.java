@@ -1,5 +1,8 @@
 package com.ftspl.NR;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -30,11 +33,12 @@ public class PRDetailActivity extends Activity implements OnClickListener {
 	
 	Button accept, reject;
 	Context context;
-	TextView BANFN,BNFPO,MATNR,MAKTX,MENGE,MEINS,AFNAM ,WERKS,BRTWR, STOCK, C0_STOCK;
+	TextView pr_num;
 	 ListView list;
 	String action, codeStr, pr_no, item_no;
+	ArrayList<HashMap<String, String>> detailList = new ArrayList<HashMap<String, String>>();
 	private ProgressDialog pdia;
-	DetailLazyAdapter adapter;
+	PRDetailLazyAdapter adapter;
 	
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,27 +47,22 @@ public class PRDetailActivity extends Activity implements OnClickListener {
         context = this;
         Intent intent = getIntent();
         int index = intent.getIntExtra("jsonIndex", 0);
+        TextView pr_num = (TextView) findViewById(R.id.pr_num);
         try {
         	JSONObject list = Constants.prListData.getJSONObject(index);
         	codeStr = list.getString("FRGC");
         	pr_no = list.getString("BANFN");
         	item_no = list.getString("BNFPO");
+        	pr_num.setText(pr_no);
         	
         } catch (JSONException e) {
     		// TODO Auto-generated catch block
     		e.printStackTrace();
     	}
         
-        BANFN = (TextView) findViewById(R.id.BANFN);
-        BNFPO = (TextView) findViewById(R.id.BNFPO);
-        MATNR = (TextView) findViewById(R.id.MATNR);
-        MAKTX = (TextView) findViewById(R.id.MAKTX);
-        MENGE = (TextView) findViewById(R.id.MENGE);
-        MEINS = (TextView) findViewById(R.id.MEINS);
-        AFNAM = (TextView) findViewById(R.id.AFNAM);
-        WERKS = (TextView) findViewById(R.id.WERKS);
-        STOCK = (TextView) findViewById(R.id.STOCK);
-        C0_STOCK = (TextView) findViewById(R.id.CO_STOCK);
+        list=(ListView)findViewById(R.id.listView1);
+        adapter = new PRDetailLazyAdapter(this, detailList);
+        list.setAdapter(adapter);
         
         accept = (Button) findViewById(R.id.accept);
         reject = (Button) findViewById(R.id.reject);
@@ -76,18 +75,22 @@ public class PRDetailActivity extends Activity implements OnClickListener {
         
         
        try {
-    	JSONObject list = Constants.releaseDetail.getJSONObject(0);
-    	
-    	BANFN.setText(list.getString("BANFN"));
-        BNFPO.setText(list.getString("BNFPO"));
-        MATNR.setText(list.getString("MATNR"));
-        MAKTX.setText(list.getString("MAKTX"));
-        MENGE.setText(list.getString("MENGE"));
-        MEINS.setText(list.getString("MEINS"));
-        AFNAM.setText(list.getString("AFNAM"));
-        WERKS.setText(list.getString("WERKS"));
-        STOCK.setText(list.getString("STOCK"));
-        C0_STOCK.setText(list.getString("C0_STOCK"));
+    	   for (int i = 0; i < Constants.releaseDetail.length(); i++) {
+    		   JSONObject record = Constants.releaseDetail.getJSONObject(i);
+    		   HashMap<String, String> map = new HashMap<String, String>();
+    		   
+    		   map.put("BANFN", record.getString("BANFN"));
+    		   map.put("BNFPO", record.getString("BNFPO"));
+    		   map.put("MATNR", record.getString("MATNR"));
+    		   map.put("MAKTX", record.getString("MAKTX"));
+    		   map.put("MENGE", record.getString("MENGE"));
+    		   map.put("MEINS", record.getString("MEINS"));
+    		   map.put("AFNAM", record.getString("AFNAM"));
+    		   map.put("WERKS", record.getString("WERKS"));
+    		   map.put("STOCK", record.getString("STOCK"));
+    		   map.put("C0_STOCK", record.getString("C0_STOCK"));
+    		   detailList.add(map);
+    	   }
         
     	
 		} catch (JSONException e) {
