@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
+    android:layout_height="150dp"
+    android:background="@color/white"
     android:orientation="horizontal"
     android:padding="10dip" >
 
     <!-- Title Of Song -->
 
-    <TextView
-        android:id="@+id/pr_text"
+    <RelativeLayout
+        android:id="@+id/relativeLayout1"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/thumbnail"
-        android:layout_toRightOf="@+id/thumbnail"
-        android:text="Material"
-        android:textSize="12sp"
-        android:textStyle="bold" />
+        android:layout_height="50dp"
+        android:weightSum="1" >
+
+        <TextView
+            android:id="@+id/pr_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:minLines="1"
+            android:scrollHorizontally="false"
+            android:text="Text"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:width="240dp" />
+
+        <TextView
+            android:id="@+id/item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_weight="1"
+            android:gravity="right"
+            android:text="00010"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
 
     <!-- Artist Name -->
 
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/pr_text" >
+        android:layout_alignTop="@+id/thumbnail"
+        android:layout_below="@id/relativeLayout1"
+        android:orientation="vertical" >
 
         <TextView
             android:id="@+id/pr_no"
@@ -31,7 +55,18 @@
             android:layout_gravity="left|center"
             android:layout_marginTop="1dip"
             android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
             android:text="pr num"
+            android:textSize="15sp" />
+
+        <TextView
+            android:id="@+id/prDate"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="1dip"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-light"
+            android:text="Date"
             android:textSize="15sp" />
 
     </LinearLayout>

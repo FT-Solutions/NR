@@ -68,8 +68,8 @@ public class POListView extends Activity {
             @Override
             public void onItemClick(AdapterView<?> parent, View view,
                     int position, long id) {
-            	TextView po_no = (TextView) view.findViewById(R.id.po_no);
-            	poNoStr = po_no.getText().toString();
+            	TextView poNo = (TextView) view.findViewById(R.id.po_no);
+            	poNoStr = poNo.getText().toString();
             	jsonIndex = position;
             	new getDetails().execute("");
             }
@@ -130,6 +130,7 @@ public class POListView extends Activity {
     public void populateList() {
     	if (jsonStr != null) {
             try {
+            	poList.clear();
                 JSONObject jsonObj = new JSONObject(jsonStr);
                  
                 // Getting JSON Array node
@@ -144,6 +145,8 @@ public class POListView extends Activity {
                     String name = c.getString("NAME1");
                     String code = c.getString("FRGC");
                     String netValue = c.getString("NETWR");
+                    String date = c.getString("AEDAT");
+
 
                     Log.d("ITEM", poNo+"=="+vendorName);
                     // tmp hashmap for single contact
@@ -154,6 +157,7 @@ public class POListView extends Activity {
                     map.put("vendorName", vendorName);
                     map.put("name", name);
                     map.put("po_code", code);
+                    map.put("po_date", date);
                     map.put("net_value", netValue);
 
                     // adding contact to contact list

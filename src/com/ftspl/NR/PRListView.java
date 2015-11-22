@@ -27,7 +27,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
 import android.widget.Toast;
  
 @SuppressLint("NewApi")
@@ -132,6 +131,7 @@ public class PRListView extends Activity {
     public void populateList() {
     	if (jsonStr != null) {
             try {
+            	prList.clear();
                 JSONObject jsonObj = new JSONObject(jsonStr);
                  
                 // Getting JSON Array node
@@ -145,6 +145,7 @@ public class PRListView extends Activity {
                     String text = c.getString("MAKTX");
                     String item_no = c.getString("BNFPO");
                     String rel_code = c.getString("FRGC");
+                    String prDate = c.getString("BADAT");
 
                     Log.d("ITEM", prNo+"=="+item_no);
                     // tmp hashmap for single contact
@@ -153,8 +154,9 @@ public class PRListView extends Activity {
                     // adding each child node to HashMap key => value
                     map.put("pr_no", prNo);
                     map.put("text", text);
-                    map.put("item-no", item_no);
+                    map.put("item_no", item_no);
                     map.put("rel_code", rel_code);
+                    map.put("prDate", prDate);
 
                     // adding contact to contact list
                     prList.add(map);
