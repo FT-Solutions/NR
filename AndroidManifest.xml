@@ -48,7 +48,22 @@
             android:name="com.ftspl.NR.DetailActivity"
             android:label="@string/app_name" >
         </activity>
-        
+
+        <activity
+            android:name="com.ftspl.NR.PRListView"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="com.ftspl.NR.POListView"
+            android:label="@string/app_name" >
+        </activity>
+
+        <activity
+            android:name="com.ftspl.NR.PRDetailActivity"
+            android:label="@string/app_name" >
+        </activity>
+
     </application>
 
 </manifest>
