@@ -81,7 +81,8 @@ public class Connect {
     }
 	
 	protected String callAPIService(String url) {
-		String result = "";  
+		Log.d("API-URL", url);
+		String result = "";
 	    HttpHost targetHost = new HttpHost(Constants.ApplicationServer, Constants.PORT, "http");  
 	    DefaultHttpClient httpclient = new DefaultHttpClient();  
 	    httpclient.getCredentialsProvider().setCredentials(new AuthScope(targetHost.getHostName(), targetHost.getPort()), new UsernamePasswordCredentials(Constants.usernameStr, Constants.passwordStr));  

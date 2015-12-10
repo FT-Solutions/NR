@@ -259,4 +259,24 @@
         </RelativeLayout>
     </RelativeLayout>
 
+    <RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="25dp"
+        android:layout_below="@id/RelativeLayout10" >
+
+        <TextView
+            android:id="@+id/TextView20"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:text="Last Price of Material:" />
+
+        <TextView
+            android:id="@+id/L_PRICE"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="150dp" />
+
+    </RelativeLayout>
 </RelativeLayout>

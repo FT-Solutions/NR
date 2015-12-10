@@ -54,7 +54,7 @@ public class POListView extends Activity {
         populateList();
             
        getActionBar().setTitle(Html.fromHtml("<font color='#000000'>PO Inbox</font>"));
-       getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+       getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
  
         list=(ListView)findViewById(R.id.list);
  

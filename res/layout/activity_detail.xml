@@ -11,60 +11,79 @@
         android:layout_margin="10dp"
         android:layout_marginBottom="20dp" >
 
-        <TextView
-            android:id="@+id/textView1"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Name:"
-            android:textSize="15sp" />
-
-        <TextView
-            android:id="@+id/name"
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@+id/textView1"
-            android:text="TextView"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:id="@+id/relName">
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView1"
-            android:text="Vendor:"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/textView1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Name:"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/vendor"
+            <TextView
+                android:id="@+id/name"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentTop="true"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@+id/textView1"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_alignLeft="@+id/name"
-            android:layout_below="@+id/name"
-            android:text="TextView"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:id="@+id/relVendor"
+            android:layout_below="@+id/relName">
 
-        <TextView
-            android:id="@+id/textView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/textView3"
-            android:text="PO Num:"
-            android:textSize="15sp" />
+            <TextView
+                android:id="@+id/textView3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Vendor:"
+                android:textSize="15sp" />
 
-        <TextView
-            android:id="@+id/po_num"
+            <TextView
+                android:id="@+id/vendor"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="TextView"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:layout_toRightOf="@+id/textView3"
+                android:layout_marginLeft="25dp" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_below="@id/vendor"
-            android:layout_marginLeft="30dp"
-            android:layout_toRightOf="@id/textView2"
-            android:text="po_num"
-            android:textSize="15sp"
-            android:textStyle="bold" />
+            android:id="@+id/relPo"
+            android:layout_below="@+id/relVendor">
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="PO Num:"
+                android:textSize="15sp" />
+
+            <TextView
+                android:id="@+id/po_num"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_toRightOf="@id/textView2"
+                android:text="po_num"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+
+        </RelativeLayout>
 
     </RelativeLayout>
 
@@ -83,7 +102,7 @@
             android:layout_weight="1" >
 
         </ListView>
-    
+
     </LinearLayout>
 
     <RelativeLayout
@@ -120,5 +139,5 @@
             android:text="Accept" />
 
     </RelativeLayout>
-    
+
     </RelativeLayout>

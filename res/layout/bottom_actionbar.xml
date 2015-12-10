@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:background="@android:color/transparent"
         android:onClick="logout"
-        android:src="@drawable/gnome_session" />
+        android:src="@drawable/gnome_session"
+        android:visibility="invisible" />
 
     <ImageButton
         android:id="@+id/exit"

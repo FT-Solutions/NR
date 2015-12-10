@@ -29,9 +29,10 @@
             android:layout_alignParentRight="true"
             android:layout_weight="1"
             android:gravity="right"
-            android:text="net Value"
-            android:textSize="30sp"
-            android:textStyle="bold" />
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:layout_alignParentBottom="true"
+            android:text="0" />
     </RelativeLayout>
 
     <!-- Artist Name -->

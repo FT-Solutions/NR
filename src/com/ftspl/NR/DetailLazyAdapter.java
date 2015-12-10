@@ -53,6 +53,7 @@ public class DetailLazyAdapter extends BaseAdapter {
         TextView NETWR = (TextView)vi.findViewById(R.id.NETWR);
         TextView BRTWR = (TextView)vi.findViewById(R.id.BRTWR);
         TextView STOCK = (TextView)vi.findViewById(R.id.STOCK);
+        TextView LPRICE = (TextView)vi.findViewById(R.id.L_PRICE);
  
         HashMap<String, String> song = new HashMap<String, String>();
         song = data.get(position);
@@ -69,6 +70,7 @@ public class DetailLazyAdapter extends BaseAdapter {
         NETWR.setText(song.get("NETWR"));
         BRTWR.setText(song.get("BRTWR"));
         STOCK.setText(song.get("STOCK"));
+        LPRICE.setText(song.get("LPRICE"));
         
         return vi;
     }

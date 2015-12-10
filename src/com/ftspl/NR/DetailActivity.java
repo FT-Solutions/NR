@@ -73,7 +73,7 @@ public class DetailActivity extends Activity implements OnClickListener {
         reject.setOnClickListener(this);
         
         getActionBar().setTitle(Html.fromHtml("<font color='#000000'>Detail View</font>"));
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
         
         list=(ListView)findViewById(R.id.listView1);
         
@@ -110,6 +110,7 @@ public class DetailActivity extends Activity implements OnClickListener {
 			map.put("NETWR",record.getString("NETWR"));
 			map.put("BRTWR",record.getString("BRTWR"));
 			map.put("STOCK",record.getString("STOCK"));
+			map.put("LPRICE", record.getString("L_PRICE"));
 			
 			detailList.add(map);
 		}

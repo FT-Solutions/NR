@@ -71,7 +71,7 @@ public class PRDetailActivity extends Activity implements OnClickListener {
         reject.setOnClickListener(this);
         
         getActionBar().setTitle(Html.fromHtml("<font color='#000000'>Detail View</font>"));
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
         
         
        try {
@@ -89,6 +89,14 @@ public class PRDetailActivity extends Activity implements OnClickListener {
     		   map.put("WERKS", record.getString("WERKS"));
     		   map.put("STOCK", record.getString("STOCK"));
     		   map.put("C0_STOCK", record.getString("C0_STOCK"));
+			   map.put("UNIT_1", record.getString("P_1310"));
+			   map.put("UNIT_2", record.getString("P_1320"));
+			   map.put("UNIT_3", record.getString("P_1330"));
+			   map.put("UNIT_4", record.getString("P_3330"));
+			   map.put("UNIT_5", record.getString("P_4340"));
+			   map.put("UNIT_6", record.getString("P_5350"));
+			   map.put("UNIT_7", record.getString("P_5360"));
+			   map.put("LTEXT", record.getString("LTEXT"));
     		   detailList.add(map);
     	   }
         

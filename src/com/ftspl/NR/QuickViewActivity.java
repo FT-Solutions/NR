@@ -51,7 +51,7 @@ public class QuickViewActivity extends Activity {
 		refresh.setVisibility(View.INVISIBLE);
 		
 		getActionBar().setTitle(Html.fromHtml("<font color='#000000'>NR Agarwal</font>"));
-        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#FFFFFF")));
+        getActionBar().setBackgroundDrawable(new ColorDrawable(Color.parseColor("#CCCCCC")));
         
 		
 	}
@@ -67,6 +67,8 @@ public class QuickViewActivity extends Activity {
 	        Constants.usernameStr = Constants.loginDetails.getString("sysem_username", "");
 	        Constants.passwordStr = Constants.loginDetails.getString("sysem_password", "");
 	        Constants.ApplicationServer = Constants.loginDetails.getString("application_server", "");
+			Constants.userId = Constants.loginDetails.getString("user_id", "");
+			Constants.SAP_CLIENT = Constants.loginDetails.getString("sap_client", "");
 			
 			if(Constants.connect.isConnectingToInternet(Constants.context)) {
 				new fetchCount().execute("");

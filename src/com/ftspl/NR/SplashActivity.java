@@ -26,6 +26,8 @@ public class SplashActivity extends Activity {
         Constants.usernameStr = Constants.loginDetails.getString("sysem_username", "");
         Constants.passwordStr = Constants.loginDetails.getString("sysem_password", "");
         Constants.ApplicationServer = Constants.loginDetails.getString("application_server", "");
+		Constants.userId = Constants.loginDetails.getString("user_id", "");
+		Constants.SAP_CLIENT = Constants.loginDetails.getString("sap_client", "");
 
 		
 		final Handler handler = new Handler();
